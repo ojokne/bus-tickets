@@ -1,18 +1,11 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text } from 'react-native';
 
-export default function HomeScreen() {
+export default function MyComponent() {
   return (
-    <View style={styles.container}>
-      <Text>Home</Text>
+    <View className="bg-background dark:bg-dark-background p-4 rounded-lg">
+      <Text className="text-foreground dark:text-dark-foreground">
+        Hello, Tailwind and NativeWind!
+      </Text>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    color: "white",
-  },
-});
