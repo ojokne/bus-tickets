@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import Animated, { FadeInDown } from "react-native-reanimated";
-import { useRoot } from "../../../context";
+import { useRoot } from "../../context";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 
@@ -194,15 +194,15 @@ export default function HomeScreen() {
 const quickActions = [
   {
     id: "1",
-    name: "New Trip",
-    icon: "plus-circle",
-    route: "/(protected)/new-trip",
-  },
-  {
-    id: "2",
     name: "Sell Ticket",
     icon: "ticket-alt",
     route: "/(protected)/sell-tickets",
+  },
+  {
+    id: "2",
+    name: "New Trip",
+    icon: "plus-circle",
+    route: "/(protected)/new-trip",
   },
   {
     id: "3",

@@ -26,7 +26,7 @@ export function RootProvider({ children }: { children: ReactNode }) {
     try {
       // Your authentication logic here
       setUser({ id: "1", email }); // Replace with actual user data
-      router.replace("/(protected)/home");
+      router.replace("/(protected)/");
     } catch (error) {
       console.error("Login error:", error);
       throw error;

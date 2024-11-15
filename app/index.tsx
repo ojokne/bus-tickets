@@ -120,11 +120,12 @@ export default function OnboardingScreen() {
                 { icon: "shield-alt", text: "Secure and reliable service" },
               ].map((feature) => (
                 <View key={feature.icon} className="flex-row items-center mb-4">
-                  <View className="w-12 h-12 bg-background rounded-2xl items-center justify-center mr-4 shadow-sm">
+                  <View className="bg-background px-2 py-2 rounded-2xl items-center justify-center mr-4 shadow-sm">
                     <FontAwesome5
                       name={feature.icon}
                       size={22}
                       color="#000080"
+                      
                     />
                   </View>
                   <Animated.Text className="text-foreground flex-1 text-base">
