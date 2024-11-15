@@ -5,58 +5,32 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Light mode colors
-        background: "hsl(0, 0%, 100%)",
-        foreground: "hsl(222.2, 84%, 4.9%)",
-        card: "hsl(0, 0%, 100%)",
-        "card-foreground": "hsl(222.2, 84%, 4.9%)",
-        popover: "hsl(0, 0%, 100%)",
-        "popover-foreground": "hsl(222.2, 84%, 4.9%)",
-        primary: "hsl(172.57, 64.57%, 34.31%)",
-        "primary-foreground": "hsl(210, 40%, 98%)",
-        secondary: "hsl(210, 40%, 96.1%)",
-        "secondary-foreground": "hsl(222.2, 47.4%, 11.2%)",
-        muted: "hsl(210, 40%, 96.1%)",
-        "muted-foreground": "hsl(215.4, 16.3%, 46.9%)",
-        accent: "hsl(210, 40%, 96.1%)",
-        "accent-foreground": "hsl(222.2, 47.4%, 11.2%)",
-        destructive: "hsl(0, 84.2%, 60.2%)",
-        "destructive-foreground": "hsl(210, 40%, 98%)",
-        border: "hsl(214.3, 31.8%, 91.4%)",
-        input: "hsl(214.3, 31.8%, 91.4%)",
-        ring: "hsl(172.57, 64.57%, 34.31%)",
-        "chart-1": "hsl(12, 76%, 61%)",
-        "chart-2": "hsl(173, 58%, 39%)",
-        "chart-3": "hsl(197, 37%, 24%)",
-        "chart-4": "hsl(43, 74%, 66%)",
-        "chart-5": "hsl(27, 87%, 67%)",
-        "link-active": "hsl(276, 100%, 50%)",
-        "link-inactive": "hsl(56, 92%, 25%)",
-        // Dark mode colors
-        "dark-background": "hsl(222.2, 84%, 4.9%)",
-        "dark-foreground": "hsl(210, 40%, 98%)",
-        "dark-card": "hsl(222.2, 84%, 4.9%)",
-        "dark-card-foreground": "hsl(210, 40%, 98%)",
-        "dark-popover": "hsl(222.2, 84%, 4.9%)",
-        "dark-popover-foreground": "hsl(210, 40%, 98%)",
-        "dark-primary": "hsl(210, 40%, 98%)",
-        "dark-primary-foreground": "hsl(222.2, 47.4%, 11.2%)",
-        "dark-secondary": "hsl(217.2, 32.6%, 17.5%)",
-        "dark-secondary-foreground": "hsl(210, 40%, 98%)",
-        "dark-muted": "hsl(217.2, 32.6%, 17.5%)",
-        "dark-muted-foreground": "hsl(215, 20.2%, 65.1%)",
-        "dark-accent": "hsl(217.2, 32.6%, 17.5%)",
-        "dark-accent-foreground": "hsl(210, 40%, 98%)",
-        "dark-destructive": "hsl(0, 62.8%, 30.6%)",
-        "dark-destructive-foreground": "hsl(210, 40%, 98%)",
-        "dark-border": "hsl(217.2, 32.6%, 17.5%)",
-        "dark-input": "hsl(217.2, 32.6%, 17.5%)",
-        "dark-ring": "hsl(212.7, 26.8%, 83.9%)",
-        "dark-chart-1": "hsl(220, 70%, 50%)",
-        "dark-chart-2": "hsl(160, 60%, 45%)",
-        "dark-chart-3": "hsl(30, 80%, 55%)",
-        "dark-chart-4": "hsl(280, 65%, 60%)",
-        "dark-chart-5": "hsl(340, 75%, 55%)",
+        background: "hsl(0, 0%, 100%)", // White
+        foreground: "hsl(240, 100%, 10%)", // Darker navy
+        card: "hsl(0, 0%, 100%)", // White
+        "card-foreground": "hsl(240, 100%, 10%)", // Darker navy
+        popover: "hsl(0, 0%, 100%)", // White
+        "popover-foreground": "hsl(240, 100%, 10%)", // Darker navy
+        primary: "hsl(240, 100%, 25%)", // Navy blue (#000080)
+        "primary-foreground": "hsl(0, 0%, 100%)", // White
+        secondary: "hsl(240, 60%, 95%)", // Light navy
+        "secondary-foreground": "hsl(240, 100%, 20%)", // Slightly darker navy
+        muted: "hsl(240, 60%, 95%)", // Light navy
+        "muted-foreground": "hsl(240, 30%, 40%)", // Muted navy
+        accent: "hsl(330, 100%, 50%)", // Bright pink (#FF007F)
+        "accent-foreground": "hsl(0, 0%, 100%)", // White
+        destructive: "hsl(0, 84%, 60%)", // Red
+        "destructive-foreground": "hsl(0, 0%, 100%)", // White
+        border: "hsl(240, 30%, 90%)", // Very light navy
+        input: "hsl(240, 30%, 90%)", // Very light navy
+        ring: "hsl(240, 100%, 25%)", // Navy blue
+
+        // Chart colors that complement navy and pink
+        "chart-1": "hsl(240, 100%, 25%)", // Navy
+        "chart-2": "hsl(330, 100%, 50%)", // Pink
+        "chart-3": "hsl(270, 60%, 50%)", // Purple
+        "chart-4": "hsl(210, 80%, 50%)", // Blue
+        "chart-5": "hsl(300, 70%, 50%)", // Magenta
       },
       borderRadius: {
         DEFAULT: "0.5rem",
@@ -64,5 +38,4 @@ module.exports = {
     },
   },
   plugins: [],
-  darkMode: "class", // Enables the dark mode strategy
 };

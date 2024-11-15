@@ -106,7 +106,7 @@ export default function LoginScreen() {
       try {
         await signIn(email, password);
       } catch (error) {
-        console.error('Login failed:', error);
+        console.error("Login failed:", error);
         // Handle login error (show message to user, etc.)
       }
     }
@@ -124,33 +124,35 @@ export default function LoginScreen() {
     ) : null;
 
   return (
-    <ScrollView className="flex-1 bg-background dark:bg-dark-background">
-      <View className="p-6">
+    <ScrollView className="flex-1 bg-background">
+      <View className="p-8">
         {/* Header */}
         <Animated.View
           entering={FadeInDown.duration(1000)}
           className="items-center mb-10 mt-16"
         >
-          <FontAwesome5 name="bus-alt" size={60} color="#4ECDC4" />
+          <View className="mb-8 p-6">
+            <FontAwesome5 name="bus-alt" size={70} color="#000080" />
+          </View>
           <AnimatedText className="text-foreground dark:text-dark-foreground text-3xl font-bold mt-4">
-            Welcome Back
+            Create Account
           </AnimatedText>
           <AnimatedText className="text-muted-foreground text-center mt-2">
-            Sign in to your BusGo account
+            Join BusGo for easier travel
           </AnimatedText>
         </Animated.View>
-
+       
         {/* Login Form */}
         <Animated.View
           entering={FadeInDown.duration(1000).delay(200)}
-          className="space-y-6 mb-6"
+          className="space-y-6 mb-8"
         >
           {/* Email Input */}
           <View className="mb-4">
-            <View className="border border-input dark:border-dark-input rounded-xl py-2">
+            <View className="border border-input rounded-xl py-2">
               <View className="flex-row items-center">
-                <View className="py-3 px-4 border-r border-input dark:border-dark-input">
-                  <FontAwesome5 name="envelope" size={20} color="#4ECDC4" />
+                <View className="px-4 border-r border-input">
+                  <FontAwesome5 name="envelope" size={20} color="#000080" />
                 </View>
                 <TextInput
                   placeholder="Email"
@@ -158,8 +160,9 @@ export default function LoginScreen() {
                   onChangeText={handleEmailChange}
                   keyboardType="email-address"
                   autoCapitalize="none"
-                  className="flex-1 py-3 px-4 text-foreground dark:text-dark-foreground"
+                  className="flex-1 py-2 px-4 text-foreground"
                   placeholderTextColor="#666"
+                  cursorColor="#000080"
                 />
               </View>
             </View>
@@ -167,19 +170,20 @@ export default function LoginScreen() {
           </View>
 
           {/* Password Input */}
-          <View>
-            <View className="border border-input dark:border-dark-input rounded-xl py-2">
+          <View className="mb-4">
+            <View className="border border-input rounded-xl py-2">
               <View className="flex-row items-center">
-                <View className="py-3 px-4 border-r border-input dark:border-dark-input">
-                  <FontAwesome5 name="lock" size={20} color="#4ECDC4" />
+                <View className="px-4 border-r border-input">
+                  <FontAwesome5 name="lock" size={20} color="#000080" />
                 </View>
                 <TextInput
                   placeholder="Password"
                   value={password}
                   onChangeText={handlePasswordChange}
                   secureTextEntry={!showPassword}
-                  className="flex-1 py-3 px-4 text-foreground dark:text-dark-foreground"
+                  className="flex-1 py-2 px-4 text-foreground"
                   placeholderTextColor="#666"
+                  cursorColor="#000080"
                 />
                 <Pressable
                   onPress={() => setShowPassword(!showPassword)}
@@ -189,6 +193,7 @@ export default function LoginScreen() {
                     name={showPassword ? "eye-slash" : "eye"}
                     size={20}
                     color="#666"
+                    solid
                   />
                 </Pressable>
               </View>
@@ -199,7 +204,7 @@ export default function LoginScreen() {
           {/* Login Button */}
           <Pressable
             onPress={handleLogin}
-            className="bg-primary py-4 rounded-xl mt-2 mb-4"
+            className="bg-primary py-4 rounded-xl mt-2 mb-6"
           >
             <AnimatedText className="text-white text-center text-lg font-semibold">
               Sign In
@@ -208,8 +213,8 @@ export default function LoginScreen() {
 
           {/* Forgot Password Link */}
           <Link href="/(auth)/forgot-password" asChild>
-            <Pressable>
-              <AnimatedText className="text-primary text-center">
+            <Pressable className="mt-4">
+              <AnimatedText className="text-primary text-center text-base font-medium">
                 Forgot Password?
               </AnimatedText>
             </Pressable>
@@ -217,18 +222,21 @@ export default function LoginScreen() {
         </Animated.View>
 
         {/* Sign Up Link */}
-        <View className="flex-row justify-center mt-4 mb-6">
-          <AnimatedText className="text-muted-foreground">
+        <Animated.View
+          entering={FadeInDown.duration(1000).delay(400)}
+          className="flex-row justify-center mt-6 mb-8"
+        >
+          <AnimatedText className="text-muted-foreground/80 text-base">
             Don't have an account?{" "}
           </AnimatedText>
           <Link href="/(auth)/register" asChild>
             <Pressable>
-              <AnimatedText className="text-primary font-semibold">
+              <AnimatedText className="text-primary font-semibold text-base">
                 Sign Up
               </AnimatedText>
             </Pressable>
           </Link>
-        </View>
+        </Animated.View>
       </View>
     </ScrollView>
   );

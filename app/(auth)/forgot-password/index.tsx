@@ -8,6 +8,7 @@ import Animated, {
 } from "react-native-reanimated";
 import { FontAwesome5 } from "@expo/vector-icons";
 import debounce from "lodash/debounce";
+import { LinearGradient } from 'expo-linear-gradient';
 
 const AnimatedText = Animated.createAnimatedComponent(Text);
 
@@ -88,104 +89,128 @@ export default function ForgotPasswordScreen() {
 
   if (isSubmitted) {
     return (
-      <ScrollView className="flex-1 bg-background dark:bg-dark-background">
-        <View className="p-6">
-          <Animated.View
-            entering={FadeInDown.duration(1000)}
-            className="items-center mb-10 mt-16"
-          >
-            <FontAwesome5 name="check-circle" size={60} color="#4ECDC4" />
-            <AnimatedText className="text-foreground dark:text-dark-foreground text-3xl font-bold mt-4">
-              Check Your Email
-            </AnimatedText>
-            <AnimatedText className="text-muted-foreground text-center mt-2">
-              We've sent password reset instructions to:
-            </AnimatedText>
-            <AnimatedText className="text-foreground dark:text-dark-foreground font-semibold mt-2">
-              {email}
-            </AnimatedText>
-          </Animated.View>
-
-          <Link href="/(auth)/login" asChild>
-            <Pressable className="bg-primary py-4 rounded-xl mt-6">
-              <AnimatedText className="text-white text-center text-lg font-semibold">
-                Back to Login
+      <ScrollView className="flex-1 bg-background">
+        <LinearGradient
+          colors={[
+            'rgba(0, 0, 128, 0.02)',
+            'rgba(255, 255, 255, 1)',
+            'rgba(255, 255, 255, 1)',
+          ]}
+          locations={[0, 0.5, 1]}
+          style={{ flex: 1 }}
+        >
+          <View className="p-6">
+            <Animated.View
+              entering={FadeInDown.duration(1000)}
+              className="items-center mb-10 mt-16"
+            >
+              <FontAwesome5 name="check-circle" size={60} color="#000080" />
+              <AnimatedText className="text-foreground text-3xl font-bold mt-4">
+                Check Your Email
               </AnimatedText>
-            </Pressable>
-          </Link>
-        </View>
+              <AnimatedText className="text-muted-foreground/80 text-center mt-2">
+                We've sent password reset instructions to:
+              </AnimatedText>
+              <AnimatedText className="text-foreground font-semibold mt-2">
+                {email}
+              </AnimatedText>
+            </Animated.View>
+
+            <Link href="/(auth)/login" asChild>
+              <Pressable className="bg-primary py-4 rounded-2xl mt-6 shadow-sm">
+                <AnimatedText className="text-white text-center text-lg font-semibold">
+                  Back to Login
+                </AnimatedText>
+              </Pressable>
+            </Link>
+          </View>
+        </LinearGradient>
       </ScrollView>
     );
   }
 
   return (
-    <ScrollView className="flex-1 bg-background dark:bg-dark-background">
-      <View className="p-6">
-        {/* Header */}
-        <Animated.View
-          entering={FadeInDown.duration(1000)}
-          className="items-center mb-10 mt-16"
-        >
-          <FontAwesome5 name="lock" size={60} color="#4ECDC4" />
-          <AnimatedText className="text-foreground dark:text-dark-foreground text-3xl font-bold mt-4">
-            Forgot Password?
-          </AnimatedText>
-          <AnimatedText className="text-muted-foreground text-center mt-2">
-            Enter your email to reset your password
-          </AnimatedText>
-        </Animated.View>
-
-        {/* Form */}
-        <Animated.View
-          entering={FadeInDown.duration(1000).delay(200)}
-          className="space-y-6 mb-6"
-        >
-          {/* Email Input */}
-          <View className="mb-4">
-            <View className="border border-input dark:border-dark-input rounded-xl py-2">
-              <View className="flex-row items-center">
-                <View className="py-3 px-4 border-r border-input dark:border-dark-input">
-                  <FontAwesome5 name="envelope" size={20} color="#4ECDC4" />
-                </View>
-                <TextInput
-                  placeholder="Email"
-                  value={email}
-                  onChangeText={handleEmailChange}
-                  keyboardType="email-address"
-                  autoCapitalize="none"
-                  className="flex-1 py-3 px-4 text-foreground dark:text-dark-foreground"
-                  placeholderTextColor="#666"
-                />
-              </View>
-            </View>
-            <ErrorMessage message={errors.email} />
-          </View>
-
-          {/* Submit Button */}
-          <Pressable
-            onPress={handleSubmit}
-            className="bg-primary py-4 rounded-xl mt-2"
+    <ScrollView className="flex-1 bg-background">
+      <LinearGradient
+        colors={[
+          'rgba(0, 0, 128, 0.02)',
+          'rgba(255, 255, 255, 1)',
+          'rgba(255, 255, 255, 1)',
+        ]}
+        locations={[0, 0.5, 1]}
+        style={{ flex: 1 }}
+      >
+        <View className="p-6">
+          {/* Header */}
+          <Animated.View
+            entering={FadeInDown.duration(1000)}
+            className="items-center mb-10 mt-16"
           >
-            <AnimatedText className="text-white text-center text-lg font-semibold">
-              Reset Password
+            <FontAwesome5 name="lock" size={60} color="#000080" />
+            <AnimatedText className="text-foreground text-3xl font-bold mt-4">
+              Forgot Password?
             </AnimatedText>
-          </Pressable>
-        </Animated.View>
+            <AnimatedText className="text-muted-foreground/80 text-center mt-2">
+              Enter your email to reset your password
+            </AnimatedText>
+          </Animated.View>
 
-        {/* Back to Login */}
-        <View className="flex-row justify-center mt-4 mb-6">
-          <AnimatedText className="text-muted-foreground">
-            Remember your password?{" "}
-          </AnimatedText>
-          <Link href="/(auth)/login" asChild>
-            <Pressable>
-              <AnimatedText className="text-primary font-semibold">
-                Sign In
+          {/* Form */}
+          <Animated.View
+            entering={FadeInDown.duration(1000).delay(200)}
+            className="space-y-6 mb-6"
+          >
+            {/* Email Input */}
+            <View className="mb-4">
+              <View className="border border-input rounded-xl py-2">
+                <View className="flex-row items-center">
+                  <View className="py-3 px-4 border-r border-input">
+                    <FontAwesome5 name="envelope" size={20} color="#000080" />
+                  </View>
+                  <TextInput
+                    placeholder="Email"
+                    value={email}
+                    onChangeText={handleEmailChange}
+                    keyboardType="email-address"
+                    autoCapitalize="none"
+                    className="flex-1 py-3 px-4 text-foreground"
+                    placeholderTextColor="#666"
+                    cursorColor="#000080"
+                  />
+                </View>
+              </View>
+              <ErrorMessage message={errors.email} />
+            </View>
+
+            {/* Submit Button */}
+            <Pressable
+              onPress={handleSubmit}
+              className="bg-primary py-4 rounded-xl mt-2 mb-6"
+            >
+              <AnimatedText className="text-white text-center text-lg font-semibold">
+                Reset Password
               </AnimatedText>
             </Pressable>
-          </Link>
+          </Animated.View>
+
+          {/* Back to Login */}
+          <Animated.View 
+            entering={FadeInDown.duration(1000).delay(400)}
+            className="flex-row justify-center mt-4 mb-6"
+          >
+            <AnimatedText className="text-muted-foreground/80">
+              Remember your password?{" "}
+            </AnimatedText>
+            <Link href="/(auth)/login" asChild>
+              <Pressable>
+                <AnimatedText className="text-primary font-semibold">
+                  Sign In
+                </AnimatedText>
+              </Pressable>
+            </Link>
+          </Animated.View>
         </View>
-      </View>
+      </LinearGradient>
     </ScrollView>
   );
 }

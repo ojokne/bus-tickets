@@ -204,15 +204,15 @@ export default function RegisterScreen() {
   );
 
   return (
-    <ScrollView className="flex-1 bg-background dark:bg-dark-background">
+    <ScrollView className="flex-1 bg-background">
       <View className="p-6">
         {/* Header */}
         <Animated.View
           entering={FadeInDown.duration(1000)}
           className="items-center mb-10 mt-16"
         >
-          <FontAwesome5 name="bus-alt" size={60} color="#4ECDC4" />
-          <AnimatedText className="text-foreground dark:text-dark-foreground text-3xl font-bold mt-4">
+          <FontAwesome5 name="bus-alt" size={60} color="#000080" />
+          <AnimatedText className="text-foreground text-3xl font-bold mt-4">
             Create Account
           </AnimatedText>
           <AnimatedText className="text-muted-foreground text-center mt-2">
@@ -227,17 +227,18 @@ export default function RegisterScreen() {
         >
           {/* Full Name Input */}
           <View className="mb-4">
-            <View className="border border-input dark:border-dark-input rounded-xl py-2">
+            <View className="border border-input rounded-xl py-2">
               <View className="flex-row items-center">
-                <View className="py-3 px-4 border-r border-input dark:border-dark-input">
-                  <FontAwesome5 name="user" size={20} color="#4ECDC4" />
+                <View className="px-4 border-r border-input">
+                  <FontAwesome5 name="user" size={20} color="#000080" />
                 </View>
                 <TextInput
                   placeholder="Full Name"
                   value={fullName}
                   onChangeText={handleFullNameChange}
-                  className="flex-1 py-3 px-4 text-foreground dark:text-dark-foreground"
+                  className="flex-1 py-2 px-4 text-foreground"
                   placeholderTextColor="#666"
+                  cursorColor="#000080"
                 />
               </View>
             </View>
@@ -246,10 +247,10 @@ export default function RegisterScreen() {
 
           {/* Email Input */}
           <View className="mb-4">
-            <View className="border border-input dark:border-dark-input rounded-xl py-2">
+            <View className="border border-input rounded-xl py-2">
               <View className="flex-row items-center">
-                <View className="py-3 px-4 border-r border-input dark:border-dark-input">
-                  <FontAwesome5 name="envelope" size={20} color="#4ECDC4" />
+                <View className="px-4 border-r border-input">
+                  <FontAwesome5 name="envelope" size={20} color="#000080" />
                 </View>
                 <TextInput
                   placeholder="Email"
@@ -257,8 +258,9 @@ export default function RegisterScreen() {
                   onChangeText={handleEmailChange}
                   keyboardType="email-address"
                   autoCapitalize="none"
-                  className="flex-1 py-3 px-4 text-foreground dark:text-dark-foreground"
+                  className="flex-1 py-2 px-4 text-foreground"
                   placeholderTextColor="#666"
+                  cursorColor="#000080"
                 />
               </View>
             </View>
@@ -267,18 +269,19 @@ export default function RegisterScreen() {
 
           {/* Password Input */}
           <View className="mb-4">
-            <View className="border border-input dark:border-dark-input rounded-xl py-2">
+            <View className="border border-input rounded-xl py-2">
               <View className="flex-row items-center">
-                <View className="py-3 px-4 border-r border-input dark:border-dark-input">
-                  <FontAwesome5 name="lock" size={20} color="#4ECDC4" />
+                <View className="px-4 border-r border-input">
+                  <FontAwesome5 name="lock" size={20} color="#000080" />
                 </View>
                 <TextInput
                   placeholder="Password"
                   value={password}
                   onChangeText={handlePasswordChange}
                   secureTextEntry={!showPassword}
-                  className="flex-1 py-3 px-4 text-foreground dark:text-dark-foreground"
+                  className="flex-1 py-2 px-4 text-foreground"
                   placeholderTextColor="#666"
+                  cursorColor="#000080"
                 />
                 <Pressable
                   onPress={() => setShowPassword(!showPassword)}
@@ -297,18 +300,19 @@ export default function RegisterScreen() {
 
           {/* Confirm Password Input */}
           <View className="mb-4">
-            <View className="border border-input dark:border-dark-input rounded-xl py-2">
+            <View className="border border-input rounded-xl py-2">
               <View className="flex-row items-center">
-                <View className="py-3 px-4 border-r border-input dark:border-dark-input">
-                  <FontAwesome5 name="lock" size={20} color="#4ECDC4" />
+                <View className="px-4 border-r border-input">
+                  <FontAwesome5 name="lock" size={20} color="#000080" />
                 </View>
                 <TextInput
                   placeholder="Confirm Password"
                   value={confirmPassword}
                   onChangeText={handleConfirmPasswordChange}
                   secureTextEntry={!showConfirmPassword}
-                  className="flex-1 py-3 px-4 text-foreground dark:text-dark-foreground"
+                  className="flex-1 py-2 px-4 text-foreground"
                   placeholderTextColor="#666"
+                  cursorColor="#000080"
                 />
                 <Pressable
                   onPress={() => setShowConfirmPassword(!showConfirmPassword)}

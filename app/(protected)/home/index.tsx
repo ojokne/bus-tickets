@@ -1,4 +1,4 @@
-import { View, ScrollView, Pressable, TextInput, Text } from "react-native";
+import { View, ScrollView, Pressable, TextInput, Text, StatusBar, SafeAreaView } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import { useRoot } from "../../../context";
@@ -11,111 +11,125 @@ export default function HomeScreen() {
   const router = useRouter();
 
   return (
-    <ScrollView className="flex-1 bg-background dark:bg-dark-background">
-      {/* Header Section */}
-      <View className="bg-primary pt-12 pb-6 px-6 rounded-b-3xl">
-        <View className="flex-row justify-between items-center mb-6">
-          <View>
-            <AnimatedText
-              entering={FadeInDown.duration(1000)}
-              className="text-white text-lg"
-            >
-              Agent Dashboard
-            </AnimatedText>
-            <AnimatedText
-              entering={FadeInDown.duration(1000).delay(200)}
-              className="text-white text-2xl font-bold"
-            >
-              {user?.email}
-            </AnimatedText>
+    <SafeAreaView className="flex-1 bg-background">
+      <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
+      <ScrollView className="flex-1">
+        {/* Header Section */}
+        <View className="px-5 pt-6">
+          {/* Top Bar */}
+          <View className="flex-row justify-between items-center mb-10">
+            <View>
+              <Text className="text-primary text-2xl font-bold tracking-tight">
+                BusGo
+              </Text>
+              <Text className="text-gray-500 text-[15px] mt-1.5">
+                Welcome back, {user?.email?.split('@')[0]}
+              </Text>
+            </View>
+            <Pressable className="w-12 h-12 bg-primary/5 rounded-full items-center justify-center">
+              <FontAwesome5 name="user" size={16} color="#000080" />
+            </Pressable>
           </View>
-          <Pressable className="w-12 h-12 bg-white/20 rounded-full items-center justify-center">
-            <FontAwesome5 name="user" size={20} color="white" />
-          </Pressable>
+
+          {/* Stats Row */}
+          <View className="flex-row justify-between bg-white rounded-2xl shadow-sm mb-8">
+            {/* Revenue Stats */}
+            <View className="flex-1 border-r border-gray-100 p-6">
+              <View className="flex-row items-center mb-3">
+                <View className="w-10 h-10 bg-primary/5 rounded-full items-center justify-center mr-3">
+                  <FontAwesome5 name="dollar-sign" size={16} color="#000080" />
+                </View>
+                <Text className="text-gray-500 text-[15px]">Revenue</Text>
+              </View>
+              <Text className="text-2xl font-bold text-foreground ml-[52px]">$1,234</Text>
+            </View>
+
+            {/* Tickets Stats */}
+            <View className="flex-1 p-6">
+              <View className="flex-row items-center mb-3">
+                <View className="w-10 h-10 bg-primary/5 rounded-full items-center justify-center mr-3">
+                  <FontAwesome5 name="ticket-alt" size={16} color="#000080" />
+                </View>
+                <Text className="text-gray-500 text-[15px]">Tickets</Text>
+              </View>
+              <Text className="text-2xl font-bold text-foreground ml-[52px]">24</Text>
+            </View>
+          </View>
         </View>
 
-        {/* Quick Stats */}
-        <Animated.View
-          entering={FadeInDown.duration(1000).delay(100)}
-          className="flex-row justify-between mt-4"
-        >
-          <View className="bg-white dark:bg-dark-background rounded-xl p-4 flex-1 mr-2">
-            <Text className="text-muted-foreground text-sm">Today's Sales</Text>
-            <Text className="text-2xl font-bold text-foreground dark:text-dark-foreground">
-              $1,234
-            </Text>
-          </View>
-          <View className="bg-white dark:bg-dark-background rounded-xl p-4 flex-1 ml-2">
-            <Text className="text-muted-foreground text-sm">Tickets Sold</Text>
-            <Text className="text-2xl font-bold text-foreground dark:text-dark-foreground">
-              24
-            </Text>
-          </View>
-        </Animated.View>
-      </View>
-
-      {/* Quick Actions */}
-      <View className="px-6 mt-6">
-        <AnimatedText
-          entering={FadeInDown.duration(1000).delay(200)}
-          className="text-xl font-bold mb-4 text-foreground dark:text-dark-foreground"
-        >
-          Quick Actions
-        </AnimatedText>
-        <View className="flex-row flex-wrap justify-between">
-          {quickActions.map((action, index) => (
-            <Animated.View
-              key={action.id}
-              entering={FadeInDown.duration(1000).delay(400 + index * 100)}
-              className="w-[48%] mb-4"
+        {/* Quick Actions */}
+        <View className="px-6 -mt-6">
+          <View className="bg-white rounded-3xl p-6 shadow-lg shadow-black/5">
+            <AnimatedText
+              entering={FadeInDown.duration(1000).delay(200)}
+              className="text-lg font-bold mb-4 text-foreground"
             >
-              <Pressable
-                onPress={() => router.push(action.route as any)}
-                className="bg-card dark:bg-dark-card p-4 rounded-xl items-center"
-              >
-                <View className="w-12 h-12 bg-primary/10 rounded-full items-center justify-center mb-2">
-                  <FontAwesome5 name={action.icon} size={24} color="#4ECDC4" />
+              Quick Actions
+            </AnimatedText>
+            <View className="flex-row flex-wrap justify-between">
+              {quickActions.map((action, index) => (
+                <Animated.View
+                  key={action.id}
+                  entering={FadeInDown.duration(1000).delay(400 + index * 100)}
+                  className="w-[48%] mb-4"
+                >
+                  <Pressable
+                    onPress={() => router.push(action.route as any)}
+                    className="bg-background p-4 rounded-2xl border border-primary/10"
+                  >
+                    <View className="w-12 h-12 bg-primary/5 rounded-xl items-center justify-center mb-3">
+                      <FontAwesome5 name={action.icon} size={20} color="#000080" solid />
+                    </View>
+                    <Text className="text-foreground font-semibold">
+                      {action.name}
+                    </Text>
+                    <Text className="text-muted-foreground text-xs mt-1">
+                      Tap to access
+                    </Text>
+                  </Pressable>
+                </Animated.View>
+              ))}
+            </View>
+          </View>
+        </View>
+
+        {/* Recent Transactions */}
+        <View className="px-6 mt-6 mb-8">
+          <AnimatedText
+            entering={FadeInDown.duration(1000).delay(300)}
+            className="text-lg font-bold mb-4 text-foreground"
+          >
+            Recent Transactions
+          </AnimatedText>
+          {recentTransactions.map((transaction, index) => (
+            <Animated.View
+              key={transaction.id}
+              entering={FadeInDown.duration(1000).delay(800 + index * 100)}
+              className="bg-white p-4 rounded-2xl mb-3 border border-primary/5"
+            >
+              <View className="flex-row justify-between items-center">
+                <View className="flex-1">
+                  <Text className="text-foreground font-semibold text-base">
+                    {transaction.route}
+                  </Text>
+                  <Text className="text-muted-foreground text-sm mt-1">
+                    {transaction.date} • #{transaction.ticketNo}
+                  </Text>
                 </View>
-                <Text className="text-foreground dark:text-dark-foreground font-semibold text-center">
-                  {action.name}
-                </Text>
-              </Pressable>
+                <View className="items-end">
+                  <Text className="text-primary font-bold text-base">
+                    ${transaction.amount}
+                  </Text>
+                  <Text className="text-muted-foreground text-xs mt-1">
+                    Completed
+                  </Text>
+                </View>
+              </View>
             </Animated.View>
           ))}
         </View>
-      </View>
-
-      {/* Recent Transactions */}
-      <View className="px-6 mt-4 mb-6">
-        <AnimatedText
-          entering={FadeInDown.duration(1000).delay(300)}
-          className="text-xl font-bold mb-4 text-foreground dark:text-dark-foreground"
-        >
-          Recent Transactions
-        </AnimatedText>
-        {recentTransactions.map((transaction, index) => (
-          <Animated.View
-            key={transaction.id}
-            entering={FadeInDown.duration(1000).delay(800 + index * 100)}
-            className="bg-card dark:bg-dark-card p-4 rounded-xl mb-3"
-          >
-            <View className="flex-row justify-between items-center">
-              <View className="flex-1">
-                <Text className="text-foreground dark:text-dark-foreground font-semibold">
-                  {transaction.route}
-                </Text>
-                <Text className="text-muted-foreground text-sm">
-                  {transaction.date} • Ticket #{transaction.ticketNo}
-                </Text>
-              </View>
-              <Text className="text-primary font-bold">
-                ${transaction.amount}
-              </Text>
-            </View>
-          </Animated.View>
-        ))}
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
