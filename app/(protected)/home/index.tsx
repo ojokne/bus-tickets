@@ -133,34 +133,54 @@ export default function HomeScreen() {
 
         {/* Recent Transactions */}
         <View className="px-6 mt-6 mb-8">
-          <AnimatedText
-            entering={FadeInDown.duration(800).delay(200)}
-            className="text-lg font-bold mb-4 text-foreground"
-          >
-            Recent Transactions
-          </AnimatedText>
+          {/* Header with View All link */}
+          <View className="flex-row justify-between items-center mb-4">
+            <AnimatedText
+              entering={FadeInDown.duration(400).delay(200)}
+              className="text-lg font-bold text-foreground"
+            >
+              Recent Transactions
+            </AnimatedText>
+            <Pressable onPress={() => router.push("/(protected)/transactions" as any)}>
+              <Text className="text-primary text-sm font-medium">View All</Text>
+            </Pressable>
+          </View>
+
+          {/* Transactions List */}
           {recentTransactions.map((transaction, index) => (
             <Animated.View
               key={transaction.id}
-              entering={FadeInDown.duration(800).delay(100 + index * 50)}
+              entering={FadeInDown.duration(400).delay(100 + index * 50)}
               className="bg-white p-4 rounded-2xl mb-3 border border-primary/5"
             >
               <View className="flex-row justify-between items-center">
+                {/* Left Side */}
                 <View className="flex-1">
-                  <Text className="text-foreground font-semibold text-base">
-                    {transaction.route}
-                  </Text>
-                  <Text className="text-muted-foreground text-sm mt-1">
-                    {transaction.date} • #{transaction.ticketNo}
-                  </Text>
+                  <View className="flex-row items-center">
+                    <View className="w-8 h-8 bg-primary/5 rounded-full items-center justify-center mr-3">
+                      <FontAwesome5 name="bus" size={14} color="#000080" />
+                    </View>
+                    <View>
+                      <Text className="text-foreground font-semibold text-base">
+                        {transaction.route}
+                      </Text>
+                      <Text className="text-muted-foreground text-xs mt-0.5">
+                        {transaction.date} • #{transaction.ticketNo}
+                      </Text>
+                    </View>
+                  </View>
                 </View>
+
+                {/* Right Side */}
                 <View className="items-end">
                   <Text className="text-primary font-bold text-base">
                     ${transaction.amount}
                   </Text>
-                  <Text className="text-muted-foreground text-xs mt-1">
-                    Completed
-                  </Text>
+                  <View className="bg-emerald-50 px-2 py-0.5 rounded-full mt-1">
+                    <Text className="text-emerald-600 text-xs font-medium">
+                      Completed
+                    </Text>
+                  </View>
                 </View>
               </View>
             </Animated.View>
