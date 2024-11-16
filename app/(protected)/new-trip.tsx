@@ -154,17 +154,14 @@ export default function NewTripScreen() {
                     </Text>
                     <Pressable
                       onPress={() => setShowToModal(true)}
-                      className="bg-white  px-4 py-3 ms-1 rounded-xl 
-                        border border-primary/5  flex-row justify-between items-center"
+                      className="bg-white px-4 py-3 ms-1 rounded-xl border border-primary/5 flex-row justify-between items-center"
                     >
                       <Text
                         className={`${
-                          formData.to
-                            ? "text-foreground dark:text-white"
-                            : "text-muted-foreground"
+                          formData.to ? "text-foreground" : "text-muted-foreground"
                         }`}
                       >
-                        {formData.to || "To"}
+                        {formData.to || "Select Destination"}
                       </Text>
                       <Ionicons name="chevron-down" size={20} color="#5959A6" />
                     </Pressable>
