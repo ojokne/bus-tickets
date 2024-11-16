@@ -7,10 +7,12 @@ import {
   TextInput,
   Modal,
   StatusBar,
+  Platform,
 } from "react-native";
 import { useState, useMemo } from "react";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 // Add available locations
 const LOCATIONS = [
@@ -97,6 +99,7 @@ const LocationSelector = ({
                   value={localSearch}
                   onChangeText={setLocalSearch}
                   autoFocus
+                  cursorColor="#000080"
                 />
                 {localSearch.length > 0 && (
                   <Pressable onPress={() => setLocalSearch("")}>
@@ -166,6 +169,10 @@ export default function NewTripScreen() {
 
   const [showFromModal, setShowFromModal] = useState(false);
   const [showToModal, setShowToModal] = useState(false);
+  const [showDatePicker, setShowDatePicker] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [showTimePicker, setShowTimePicker] = useState(false);
+  const [selectedTime, setSelectedTime] = useState(new Date());
 
   const handleSubmit = async () => {
     try {
@@ -173,6 +180,28 @@ export default function NewTripScreen() {
       router.back();
     } catch (error) {
       console.error("Error creating trip:", error);
+    }
+  };
+
+  const handleDateChange = (event: any, date?: Date) => {
+    setShowDatePicker(Platform.OS === 'ios');
+    if (date) {
+      setSelectedDate(date);
+      const formattedDate = date.toLocaleDateString('en-GB'); // DD/MM/YYYY format
+      setFormData({ ...formData, date: formattedDate });
+    }
+  };
+
+  const handleTimeChange = (event: any, time?: Date) => {
+    setShowTimePicker(Platform.OS === 'ios');
+    if (time) {
+      setSelectedTime(time);
+      const formattedTime = time.toLocaleTimeString('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true
+      });
+      setFormData({ ...formData, time: formattedTime });
     }
   };
 
@@ -266,31 +295,67 @@ export default function NewTripScreen() {
                   <Text className="text-sm font-medium mb-1.5 mt-1.5 text-foreground">
                     Date
                   </Text>
-                  <TextInput
-                    value={formData.date}
-                    onChangeText={(text) =>
-                      setFormData({ ...formData, date: text })
-                    }
-                    placeholder="DD/MM/YYYY"
-                    placeholderTextColor="#5959A6"
-                    className="bg-white  px-4 py-3 rounded-xl 
-                      border border-gray-200 text-foreground  me-1"
-                  />
+                  <Pressable
+                    onPress={() => setShowDatePicker(true)}
+                    className="bg-white px-4 py-3 rounded-xl border border-primary/5 flex-row justify-between items-center me-1"
+                  >
+                    <Text className={formData.date ? "text-foreground" : "text-muted-foreground"}>
+                      {formData.date || "DD/MM/YYYY"}
+                    </Text>
+                    <Ionicons name="calendar-outline" size={20} color="#5959A6" />
+                  </Pressable>
+
+                  {/* Date Picker */}
+                  {showDatePicker && (
+                    <DateTimePicker
+                      value={selectedDate}
+                      mode="date"
+                      display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+                      onChange={handleDateChange}
+                      minimumDate={new Date()} // Only allow future date
+                      style={Platform.OS === 'ios' ? { 
+                        position: 'absolute',
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        backgroundColor: 'white'
+                      } : undefined}
+                    />
+                  )}
                 </View>
                 <View className="flex-1">
                   <Text className="text-sm font-medium mb-1.5 mt-1.5 text-foreground">
                     Time
                   </Text>
-                  <TextInput
-                    value={formData.time}
-                    onChangeText={(text) =>
-                      setFormData({ ...formData, time: text })
-                    }
-                    placeholder="HH:MM"
-                    placeholderTextColor="#5959A6"
-                    className="bg-white  px-4 py-3 rounded-xl 
-                      border border-primary/5  text-foreground  ms-1"
-                  />
+                  <Pressable
+                    onPress={() => setShowTimePicker(true)}
+                    className="bg-white px-4 py-3 rounded-xl border border-primary/5 flex-row justify-between items-center ms-1"
+                  >
+                    <Text className={formData.time ? "text-foreground" : "text-muted-foreground"}>
+                      {formData.time || "Select Time"}
+                    </Text>
+                    <Ionicons name="time-outline" size={20} color="#5959A6" />
+                  </Pressable>
+
+                  {/* Time Picker */}
+                  {showTimePicker && (
+                    <DateTimePicker
+                      value={selectedTime}
+                      mode="time"
+                      is24Hour={false}
+                      display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+                      onChange={handleTimeChange}
+                      accentColor="#000080"
+                      textColor="#000000"
+                      style={Platform.OS === 'ios' ? { 
+                        position: 'absolute',
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        backgroundColor: 'white'
+                      } : undefined}
+                    />
+                  )}
                 </View>
               </View>
             </View>
