@@ -85,310 +85,313 @@ export default function NewTripScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-background pt-8">
-      {/* Header */}
-      <View className="border-b border-primary/5 ">
-        <View className="flex-row items-center p-4">
-          <Pressable
-            onPress={() => router.back()}
-            className="mr-4 p-2 rounded-full bg-primary/5"
-          >
-            <Ionicons name="arrow-back" size={24} color="#000080" />
-          </Pressable>
-          <View>
-            <Text className="text-2xl font-bold text-foreground">
-              Create New Trip
-            </Text>
-            <Text className="text-sm text-muted-foreground">
-              Fill in the trip details below
-            </Text>
-          </View>
-        </View>
-      </View>
-
-      <ScrollView className="flex-1">
-        <View className="p-4 space-y-6">
-          {/* Route Information Card */}
-          <View className="rounded-2xl p-4 mb-4 border border-primary/5">
-            <View className="flex-row items-center mb-4">
-              <View className="w-10 h-10 rounded-full bg-primary/5 items-center justify-center mr-2">
-                <Ionicons name="map-outline" size={24} color="#000080" />
-              </View>
-              <Text className="text-lg font-semibold text-foreground">
-                Route Information
+    <>
+      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
+      <SafeAreaView className="flex-1 bg-background pt-8">
+        {/* Header */}
+        <View className="border-b border-primary/5">
+          <View className="flex-row items-center p-4">
+            <Pressable
+              onPress={() => router.back()}
+              className="mr-4 p-2 rounded-full bg-primary/5"
+            >
+              <Ionicons name="arrow-back" size={24} color="#000080" />
+            </Pressable>
+            <View>
+              <Text className="text-2xl font-bold text-foreground">
+                Create New Trip
+              </Text>
+              <Text className="text-sm text-muted-foreground">
+                Fill in the trip details below
               </Text>
             </View>
+          </View>
+        </View>
 
-            <View className="space-y-4">
-              <View className="flex-row space-x-4">
-                <View className="flex-1">
-                  <Text className="text-sm font-medium mb-1.5 mt-1.5 text-foreground">
-                    From
-                  </Text>
-                  <Pressable
-                    onPress={() => setShowFromModal(true)}
-                    className="bg-white  px-4 py-3 me-1 rounded-xl 
-                      border border-primary/5 flex-row justify-between items-center"
-                  >
-                    <Text
-                      className={`${
-                        formData.from
-                          ? "text-foreground"
-                          : "text-muted-foreground"
-                      }`}
+        <ScrollView className="flex-1">
+          <View className="p-4 space-y-6">
+            {/* Route Information Card */}
+            <View className="rounded-2xl p-4 mb-4 border border-primary/5">
+              <View className="flex-row items-center mb-4">
+                <View className="w-10 h-10 rounded-full bg-primary/5 items-center justify-center mr-2">
+                  <Ionicons name="map-outline" size={24} color="#000080" />
+                </View>
+                <Text className="text-lg font-semibold text-foreground">
+                  Route Information
+                </Text>
+              </View>
+
+              <View className="space-y-4">
+                <View className="flex-row space-x-4">
+                  <View className="flex-1">
+                    <Text className="text-sm font-medium mb-1.5 mt-1.5 text-foreground">
+                      From
+                    </Text>
+                    <Pressable
+                      onPress={() => setShowFromModal(true)}
+                      className="bg-white  px-4 py-3 me-1 rounded-xl 
+                        border border-primary/5 flex-row justify-between items-center"
                     >
-                      {formData.from || "From"}
+                      <Text
+                        className={`${
+                          formData.from
+                            ? "text-foreground"
+                            : "text-muted-foreground"
+                        }`}
+                      >
+                        {formData.from || "From"}
+                      </Text>
+                      <Ionicons
+                        name="chevron-down"
+                        size={20}
+                        color="#5959A6"
+                      />
+                    </Pressable>
+                  </View>
+                  <View className="flex-1">
+                    <Text className="text-sm font-medium mb-1.5 mt-1.5 text-foreground">
+                      To
                     </Text>
-                    <Ionicons
-                      name="chevron-down"
-                      size={20}
-                      color="#5959A6"
-                    />
-                  </Pressable>
-                </View>
-                <View className="flex-1">
-                  <Text className="text-sm font-medium mb-1.5 mt-1.5 text-foreground">
-                    To
-                  </Text>
-                  <Pressable
-                    onPress={() => setShowToModal(true)}
-                    className="bg-white  px-4 py-3 ms-1 rounded-xl 
-                      border border-primary/5  flex-row justify-between items-center"
-                  >
-                    <Text
-                      className={`${
-                        formData.to
-                          ? "text-foreground dark:text-white"
-                          : "text-muted-foreground"
-                      }`}
+                    <Pressable
+                      onPress={() => setShowToModal(true)}
+                      className="bg-white  px-4 py-3 ms-1 rounded-xl 
+                        border border-primary/5  flex-row justify-between items-center"
                     >
-                      {formData.to || "To"}
+                      <Text
+                        className={`${
+                          formData.to
+                            ? "text-foreground dark:text-white"
+                            : "text-muted-foreground"
+                        }`}
+                      >
+                        {formData.to || "To"}
+                      </Text>
+                      <Ionicons name="chevron-down" size={20} color="#5959A6" />
+                    </Pressable>
+                  </View>
+                </View>
+
+                <View className="flex-row space-x-4">
+                  <View className="flex-1">
+                    <Text className="text-sm font-medium mb-1.5 mt-1.5 text-foreground">
+                      Date
+                    </Text>
+                    <Pressable
+                      onPress={() => setShowDatePicker(true)}
+                      className="bg-white px-4 py-3 rounded-xl border border-primary/5 flex-row justify-between items-center me-1"
+                    >
+                      <Text className={formData.date ? "text-foreground" : "text-muted-foreground"}>
+                        {formData.date || "DD/MM/YYYY"}
+                      </Text>
+                      <Ionicons name="calendar-outline" size={20} color="#5959A6" />
+                    </Pressable>
+
+                    {/* Date Picker */}
+                    {showDatePicker && (
+                      <DateTimePicker
+                        value={selectedDate}
+                        mode="date"
+                        display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+                        onChange={handleDateChange}
+                        minimumDate={new Date()} // Only allow future date
+                        style={Platform.OS === 'ios' ? { 
+                          position: 'absolute',
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
+                          backgroundColor: 'white'
+                        } : undefined}
+                      />
+                    )}
+                  </View>
+                  <View className="flex-1">
+                    <Text className="text-sm font-medium mb-1.5 mt-1.5 text-foreground">
+                      Time
+                    </Text>
+                    <Pressable
+                      onPress={() => setShowTimePicker(true)}
+                      className="bg-white px-4 py-3 rounded-xl border border-primary/5 flex-row justify-between items-center ms-1"
+                    >
+                      <Text className={formData.time ? "text-foreground" : "text-muted-foreground"}>
+                        {formData.time || "Select Time"}
+                      </Text>
+                      <Ionicons name="time-outline" size={20} color="#5959A6" />
+                    </Pressable>
+
+                    {/* Time Picker */}
+                    {showTimePicker && (
+                      <DateTimePicker
+                        value={selectedTime}
+                        mode="time"
+                        is24Hour={false}
+                        display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+                        onChange={handleTimeChange}
+                        accentColor="#000080"
+                        textColor="#000000"
+                        style={Platform.OS === 'ios' ? { 
+                          position: 'absolute',
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
+                          backgroundColor: 'white'
+                        } : undefined}
+                      />
+                    )}
+                  </View>
+                </View>
+              </View>
+            </View>
+
+            {/* Bus Details Card */}
+            <View className="rounded-2xl p-4 mb-4 border border-primary/5">
+              <View className="flex-row items-center mb-4">
+                <View className="w-10 h-10 rounded-full bg-primary/5 items-center justify-center mr-2">
+                  <Ionicons name="bus-outline" size={24} color="#000080" />
+                </View>
+                <Text className="text-lg font-semibold text-foreground">
+                  Bus Details
+                </Text>
+              </View>
+
+              <View className="space-y-4">
+                <View>
+                  <Text className="text-sm font-medium mb-1.5 mt-1.5 text-foreground">
+                    Bus Number
+                  </Text>
+                  <Pressable
+                    onPress={() => setShowBusModal(true)}
+                    className="bg-white px-4 py-3 rounded-xl border border-primary/5 flex-row justify-between items-center"
+                  >
+                    <Text className={formData.busNumber ? "text-foreground" : "text-muted-foreground"}>
+                      {formData.busNumber || "Select Bus Number"}
                     </Text>
                     <Ionicons name="chevron-down" size={20} color="#5959A6" />
                   </Pressable>
                 </View>
+                <View className="flex-row space-x-4">
+                  <View className="flex-1">
+                    <Text className="text-sm font-medium mb-1.5 mt-1.5 text-foreground">
+                      Driver
+                    </Text>
+                    <Pressable
+                      onPress={() => setShowDriverModal(true)}
+                      className="bg-white px-4 py-3 rounded-xl border border-primary/5 flex-row justify-between items-center me-1"
+                    >
+                      <Text className={formData.driverName ? "text-foreground" : "text-muted-foreground"}>
+                        {formData.driverName || "Select Driver"}
+                      </Text>
+                      <Ionicons name="chevron-down" size={20} color="#5959A6" />
+                    </Pressable>
+                  </View>
+                  <View className="flex-1">
+                    <Text className="text-sm font-medium mb-1.5 mt-1.5 text-foreground">
+                      Conductor
+                    </Text>
+                    <Pressable
+                      onPress={() => setShowConductorModal(true)}
+                      className="bg-white px-4 py-3 rounded-xl border border-primary/5 flex-row justify-between items-center ms-1"
+                    >
+                      <Text className={formData.conductorName ? "text-foreground" : "text-muted-foreground"}>
+                        {formData.conductorName || "Select Conductor"}
+                      </Text>
+                      <Ionicons name="chevron-down" size={20} color="#5959A6" />
+                    </Pressable>
+                  </View>
+                </View>
+              </View>
+            </View>
+
+            {/* Ticket Details Card */}
+            <View className="rounded-2xl p-4 border border-primary/5">
+              <View className="flex-row items-center mb-4">
+                <View className="w-10 h-10 rounded-full bg-primary/5 items-center justify-center mr-2">
+                  <Ionicons name="ticket-outline" size={24} color="#000080" />
+                </View>
+                <Text className="text-lg font-semibold text-foreground">
+                  Ticket Details
+                </Text>
               </View>
 
               <View className="flex-row space-x-4">
                 <View className="flex-1">
                   <Text className="text-sm font-medium mb-1.5 mt-1.5 text-foreground">
-                    Date
+                    Ticket Price
                   </Text>
-                  <Pressable
-                    onPress={() => setShowDatePicker(true)}
-                    className="bg-white px-4 py-3 rounded-xl border border-primary/5 flex-row justify-between items-center me-1"
-                  >
-                    <Text className={formData.date ? "text-foreground" : "text-muted-foreground"}>
-                      {formData.date || "DD/MM/YYYY"}
-                    </Text>
-                    <Ionicons name="calendar-outline" size={20} color="#5959A6" />
-                  </Pressable>
-
-                  {/* Date Picker */}
-                  {showDatePicker && (
-                    <DateTimePicker
-                      value={selectedDate}
-                      mode="date"
-                      display={Platform.OS === 'ios' ? 'spinner' : 'default'}
-                      onChange={handleDateChange}
-                      minimumDate={new Date()} // Only allow future date
-                      style={Platform.OS === 'ios' ? { 
-                        position: 'absolute',
-                        bottom: 0,
-                        left: 0,
-                        right: 0,
-                        backgroundColor: 'white'
-                      } : undefined}
-                    />
-                  )}
+                  <TextInput
+                    value={formData.price}
+                    onChangeText={(text) =>
+                      setFormData({ ...formData, price: text })
+                    }
+                    placeholder="0.00"
+                    keyboardType="decimal-pad"
+                    placeholderTextColor="#5959A6"
+                    className="bg-white px-4 py-3 rounded-xl border border-primary/5 text-foreground me-1"
+                  />
                 </View>
                 <View className="flex-1">
                   <Text className="text-sm font-medium mb-1.5 mt-1.5 text-foreground">
-                    Time
+                    Total Seats
                   </Text>
-                  <Pressable
-                    onPress={() => setShowTimePicker(true)}
-                    className="bg-white px-4 py-3 rounded-xl border border-primary/5 flex-row justify-between items-center ms-1"
-                  >
-                    <Text className={formData.time ? "text-foreground" : "text-muted-foreground"}>
-                      {formData.time || "Select Time"}
-                    </Text>
-                    <Ionicons name="time-outline" size={20} color="#5959A6" />
-                  </Pressable>
-
-                  {/* Time Picker */}
-                  {showTimePicker && (
-                    <DateTimePicker
-                      value={selectedTime}
-                      mode="time"
-                      is24Hour={false}
-                      display={Platform.OS === 'ios' ? 'spinner' : 'default'}
-                      onChange={handleTimeChange}
-                      accentColor="#000080"
-                      textColor="#000000"
-                      style={Platform.OS === 'ios' ? { 
-                        position: 'absolute',
-                        bottom: 0,
-                        left: 0,
-                        right: 0,
-                        backgroundColor: 'white'
-                      } : undefined}
-                    />
-                  )}
+                  <TextInput
+                    value={formData.totalSeats}
+                    onChangeText={(text) =>
+                      setFormData({ ...formData, totalSeats: text })
+                    }
+                    keyboardType="number-pad"
+                    placeholder="45"
+                    placeholderTextColor="#5959A6"
+                    className="bg-white px-4 py-3 rounded-xl border border-primary/5 text-foreground ms-1"
+                  />
                 </View>
               </View>
             </View>
           </View>
-
-          {/* Bus Details Card */}
-          <View className="rounded-2xl p-4 mb-4 border border-primary/5">
-            <View className="flex-row items-center mb-4">
-              <View className="w-10 h-10 rounded-full bg-primary/5 items-center justify-center mr-2">
-                <Ionicons name="bus-outline" size={24} color="#000080" />
-              </View>
-              <Text className="text-lg font-semibold text-foreground">
-                Bus Details
+          {/* Submit Button */}
+          <View className="p-4 bg-white ">
+            <Pressable
+              onPress={handleSubmit}
+              className="bg-primary p-4 rounded-xl items-center"
+            >
+              <Text className="text-white font-semibold text-lg">
+                Create Trip
               </Text>
-            </View>
-
-            <View className="space-y-4">
-              <View>
-                <Text className="text-sm font-medium mb-1.5 mt-1.5 text-foreground">
-                  Bus Number
-                </Text>
-                <Pressable
-                  onPress={() => setShowBusModal(true)}
-                  className="bg-white px-4 py-3 rounded-xl border border-primary/5 flex-row justify-between items-center"
-                >
-                  <Text className={formData.busNumber ? "text-foreground" : "text-muted-foreground"}>
-                    {formData.busNumber || "Select Bus Number"}
-                  </Text>
-                  <Ionicons name="chevron-down" size={20} color="#5959A6" />
-                </Pressable>
-              </View>
-              <View className="flex-row space-x-4">
-                <View className="flex-1">
-                  <Text className="text-sm font-medium mb-1.5 mt-1.5 text-foreground">
-                    Driver
-                  </Text>
-                  <Pressable
-                    onPress={() => setShowDriverModal(true)}
-                    className="bg-white px-4 py-3 rounded-xl border border-primary/5 flex-row justify-between items-center me-1"
-                  >
-                    <Text className={formData.driverName ? "text-foreground" : "text-muted-foreground"}>
-                      {formData.driverName || "Select Driver"}
-                    </Text>
-                    <Ionicons name="chevron-down" size={20} color="#5959A6" />
-                  </Pressable>
-                </View>
-                <View className="flex-1">
-                  <Text className="text-sm font-medium mb-1.5 mt-1.5 text-foreground">
-                    Conductor
-                  </Text>
-                  <Pressable
-                    onPress={() => setShowConductorModal(true)}
-                    className="bg-white px-4 py-3 rounded-xl border border-primary/5 flex-row justify-between items-center ms-1"
-                  >
-                    <Text className={formData.conductorName ? "text-foreground" : "text-muted-foreground"}>
-                      {formData.conductorName || "Select Conductor"}
-                    </Text>
-                    <Ionicons name="chevron-down" size={20} color="#5959A6" />
-                  </Pressable>
-                </View>
-              </View>
-            </View>
+            </Pressable>
           </View>
+        </ScrollView>
 
-          {/* Ticket Details Card */}
-          <View className="rounded-2xl p-4 border border-primary/5">
-            <View className="flex-row items-center mb-4">
-              <View className="w-10 h-10 rounded-full bg-primary/5 items-center justify-center mr-2">
-                <Ionicons name="ticket-outline" size={24} color="#000080" />
-              </View>
-              <Text className="text-lg font-semibold text-foreground">
-                Ticket Details
-              </Text>
-            </View>
+        {/* Location Selectors */}
+        <LocationSelector
+          visible={showFromModal}
+          onClose={() => setShowFromModal(false)}
+          onSelect={(location) => setFormData({ ...formData, from: location })}
+          title="Select Departure City"
+        />
 
-            <View className="flex-row space-x-4">
-              <View className="flex-1">
-                <Text className="text-sm font-medium mb-1.5 mt-1.5 text-foreground">
-                  Ticket Price
-                </Text>
-                <TextInput
-                  value={formData.price}
-                  onChangeText={(text) =>
-                    setFormData({ ...formData, price: text })
-                  }
-                  placeholder="0.00"
-                  keyboardType="decimal-pad"
-                  placeholderTextColor="#5959A6"
-                  className="bg-white px-4 py-3 rounded-xl border border-primary/5 text-foreground me-1"
-                />
-              </View>
-              <View className="flex-1">
-                <Text className="text-sm font-medium mb-1.5 mt-1.5 text-foreground">
-                  Total Seats
-                </Text>
-                <TextInput
-                  value={formData.totalSeats}
-                  onChangeText={(text) =>
-                    setFormData({ ...formData, totalSeats: text })
-                  }
-                  keyboardType="number-pad"
-                  placeholder="45"
-                  placeholderTextColor="#5959A6"
-                  className="bg-white px-4 py-3 rounded-xl border border-primary/5 text-foreground ms-1"
-                />
-              </View>
-            </View>
-          </View>
-        </View>
-        {/* Submit Button */}
-        <View className="p-4 bg-white ">
-          <Pressable
-            onPress={handleSubmit}
-            className="bg-primary p-4 rounded-xl items-center"
-          >
-            <Text className="text-white font-semibold text-lg">
-              Create Trip
-            </Text>
-          </Pressable>
-        </View>
-      </ScrollView>
+        <LocationSelector
+          visible={showToModal}
+          onClose={() => setShowToModal(false)}
+          onSelect={(location) => setFormData({ ...formData, to: location })}
+          title="Select Arrival City"
+        />
 
-      {/* Location Selectors */}
-      <LocationSelector
-        visible={showFromModal}
-        onClose={() => setShowFromModal(false)}
-        onSelect={(location) => setFormData({ ...formData, from: location })}
-        title="Select Departure City"
-      />
+        <BusSelector
+          visible={showBusModal}
+          onClose={() => setShowBusModal(false)}
+          onSelect={(bus) => setFormData({ ...formData, busNumber: bus })}
+        />
 
-      <LocationSelector
-        visible={showToModal}
-        onClose={() => setShowToModal(false)}
-        onSelect={(location) => setFormData({ ...formData, to: location })}
-        title="Select Arrival City"
-      />
+        <ConductorSelector
+          visible={showConductorModal}
+          onClose={() => setShowConductorModal(false)}
+          onSelect={(conductor) => setFormData({ ...formData, conductorName: conductor })}
+        />
 
-      <BusSelector
-        visible={showBusModal}
-        onClose={() => setShowBusModal(false)}
-        onSelect={(bus) => setFormData({ ...formData, busNumber: bus })}
-      />
-
-      <ConductorSelector
-        visible={showConductorModal}
-        onClose={() => setShowConductorModal(false)}
-        onSelect={(conductor) => setFormData({ ...formData, conductorName: conductor })}
-      />
-
-      <DriverSelector
-        visible={showDriverModal}
-        onClose={() => setShowDriverModal(false)}
-        onSelect={(driver) => setFormData({ ...formData, driverName: driver })}
-      />
-    </SafeAreaView>
+        <DriverSelector
+          visible={showDriverModal}
+          onClose={() => setShowDriverModal(false)}
+          onSelect={(driver) => setFormData({ ...formData, driverName: driver })}
+        />
+      </SafeAreaView>
+    </>
   );
 }
