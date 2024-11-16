@@ -27,7 +27,7 @@ export default function HomeScreen() {
         {/* Header Section */}
         <View className="px-5 pt-12">
           {/* Top Bar */}
-          <View className="flex-row justify-between items-center mb-10">
+          <View className="flex-row justify-between mb-10 ">
             <View>
               <Text className="text-primary text-3xl font-bold tracking-wider">
                 BusGo
