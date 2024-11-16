@@ -15,6 +15,7 @@ import { Ionicons } from "@expo/vector-icons";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { LocationSelector } from "../../components/new-trip/LocationSelector";
 import { BusSelector } from "../../components/new-trip/BusSelector";
+import { ConductorSelector } from "../../components/new-trip/ConductorSelector";
 
 interface TripFormData {
   from: string;
@@ -48,6 +49,7 @@ export default function NewTripScreen() {
   const [showTimePicker, setShowTimePicker] = useState(false);
   const [selectedTime, setSelectedTime] = useState(new Date());
   const [showBusModal, setShowBusModal] = useState(false);
+  const [showConductorModal, setShowConductorModal] = useState(false);
 
   const handleSubmit = async () => {
     try {
@@ -281,15 +283,15 @@ export default function NewTripScreen() {
                   <Text className="text-sm font-medium mb-1.5 mt-1.5 text-foreground">
                     Conductor
                   </Text>
-                  <TextInput
-                    value={formData.conductorName}
-                    onChangeText={(text) =>
-                      setFormData({ ...formData, conductorName: text })
-                    }
-                    placeholder="Conductor"
-                    placeholderTextColor="#5959A6"
-                    className="bg-white px-4 py-3 rounded-xl border border-primary/5 text-foreground ms-1"
-                  />
+                  <Pressable
+                    onPress={() => setShowConductorModal(true)}
+                    className="bg-white px-4 py-3 rounded-xl border border-primary/5 flex-row justify-between items-center ms-1"
+                  >
+                    <Text className={formData.conductorName ? "text-foreground" : "text-muted-foreground"}>
+                      {formData.conductorName || "Select Conductor"}
+                    </Text>
+                    <Ionicons name="chevron-down" size={20} color="#5959A6" />
+                  </Pressable>
                 </View>
               </View>
             </View>
@@ -372,6 +374,12 @@ export default function NewTripScreen() {
         visible={showBusModal}
         onClose={() => setShowBusModal(false)}
         onSelect={(bus) => setFormData({ ...formData, busNumber: bus })}
+      />
+
+      <ConductorSelector
+        visible={showConductorModal}
+        onClose={() => setShowConductorModal(false)}
+        onSelect={(conductor) => setFormData({ ...formData, conductorName: conductor })}
       />
     </SafeAreaView>
   );
