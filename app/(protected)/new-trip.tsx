@@ -16,6 +16,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { LocationSelector } from "../../components/new-trip/LocationSelector";
 import { BusSelector } from "../../components/new-trip/BusSelector";
 import { ConductorSelector } from "../../components/new-trip/ConductorSelector";
+import { DriverSelector } from "../../components/new-trip/DriverSelector";
 
 interface TripFormData {
   from: string;
@@ -50,6 +51,7 @@ export default function NewTripScreen() {
   const [selectedTime, setSelectedTime] = useState(new Date());
   const [showBusModal, setShowBusModal] = useState(false);
   const [showConductorModal, setShowConductorModal] = useState(false);
+  const [showDriverModal, setShowDriverModal] = useState(false);
 
   const handleSubmit = async () => {
     try {
@@ -267,17 +269,17 @@ export default function NewTripScreen() {
               <View className="flex-row space-x-4">
                 <View className="flex-1">
                   <Text className="text-sm font-medium mb-1.5 mt-1.5 text-foreground">
-                    Driver 
+                    Driver
                   </Text>
-                  <TextInput
-                    value={formData.driverName}
-                    onChangeText={(text) =>
-                      setFormData({ ...formData, driverName: text })
-                    }
-                    placeholder="Driver"
-                    placeholderTextColor="#5959A6"
-                    className="bg-white px-4 py-3 rounded-xl border border-primary/5 text-foreground me-1"
-                  />
+                  <Pressable
+                    onPress={() => setShowDriverModal(true)}
+                    className="bg-white px-4 py-3 rounded-xl border border-primary/5 flex-row justify-between items-center me-1"
+                  >
+                    <Text className={formData.driverName ? "text-foreground" : "text-muted-foreground"}>
+                      {formData.driverName || "Select Driver"}
+                    </Text>
+                    <Ionicons name="chevron-down" size={20} color="#5959A6" />
+                  </Pressable>
                 </View>
                 <View className="flex-1">
                   <Text className="text-sm font-medium mb-1.5 mt-1.5 text-foreground">
@@ -380,6 +382,12 @@ export default function NewTripScreen() {
         visible={showConductorModal}
         onClose={() => setShowConductorModal(false)}
         onSelect={(conductor) => setFormData({ ...formData, conductorName: conductor })}
+      />
+
+      <DriverSelector
+        visible={showDriverModal}
+        onClose={() => setShowDriverModal(false)}
+        onSelect={(driver) => setFormData({ ...formData, driverName: driver })}
       />
     </SafeAreaView>
   );
