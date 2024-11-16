@@ -67,13 +67,13 @@ const LocationSelector = ({
       onRequestClose={onClose}
       statusBarTranslucent={false}
     >
-      <View className="flex-1 bg-white dark:bg-gray-900">
+      <View className="flex-1 bg-white">
         <SafeAreaView className="flex-1">
           <View className="flex-1">
             {/* Fixed Header with extra padding */}
-            <View className="pt-10 px-4 pb-4 border-b border-gray-200 dark:border-gray-800">
+            <View className="pt-10 px-4 pb-4 border-b border-primary/5">
               <View className="flex-row justify-between items-center mb-6">
-                <Text className="text-lg font-semibold text-center text-foreground dark:text-white flex-1">
+                <Text className="text-lg font-semibold text-center text-foreground flex-1">
                   {title}
                 </Text>
                 <Pressable
@@ -81,26 +81,26 @@ const LocationSelector = ({
                     setLocalSearch("");
                     onClose();
                   }}
-                  className="p-2 rounded-full bg-gray-100 dark:bg-gray-800"
+                  className="p-2 rounded-full bg-primary/5"
                 >
-                  <Ionicons name="close" size={20} color="#666" />
+                  <Ionicons name="close" size={20} color="#000080" />
                 </Pressable>
               </View>
 
               {/* Search Bar */}
-              <View className="bg-gray-100 dark:bg-gray-800 rounded-xl flex-row items-center px-4">
-                <Ionicons name="search" size={20} color="#666" />
+              <View className="border border-primary/5 rounded-xl flex-row items-center px-4">
+                <Ionicons name="search" size={20} color="#5959A6" />
                 <TextInput
                   placeholder="Search location..."
-                  placeholderTextColor="#666"
-                  className="flex-1 py-3 px-2 text-foreground dark:text-white"
+                  placeholderTextColor="#5959A6"
+                  className="flex-1 py-3 px-2 text-muted-foreground"
                   value={localSearch}
                   onChangeText={setLocalSearch}
                   autoFocus
                 />
                 {localSearch.length > 0 && (
                   <Pressable onPress={() => setLocalSearch("")}>
-                    <Ionicons name="close-circle" size={20} color="#666" />
+                    <Ionicons name="close-circle" size={20} color="#5959A6" />
                   </Pressable>
                 )}
               </View>
@@ -113,7 +113,7 @@ const LocationSelector = ({
             >
               {filteredLocations.length === 0 ? (
                 <View className="py-8 items-center">
-                  <Text className="text-gray-500 dark:text-gray-400">
+                  <Text className="text-muted-foreground">
                     No locations found
                   </Text>
                 </View>
@@ -126,20 +126,20 @@ const LocationSelector = ({
                       setLocalSearch("");
                       onClose();
                     }}
-                    className="py-4 border-b border-gray-200 dark:border-gray-800 flex-row justify-between items-center"
+                    className="py-4 border-b border-primary/5 flex-row justify-between items-center"
                   >
                     <View className="flex-row items-center">
                       <Ionicons
                         name="location-outline"
                         size={20}
-                        color="#4ECDC4"
+                        color="#5959A6"
                         className="mr-2"
                       />
-                      <Text className="text-foreground dark:text-white text-lg">
+                      <Text className="text-muted-foreground text-lg">
                         {location}
                       </Text>
                     </View>
-                    <Ionicons name="chevron-forward" size={20} color="#666" />
+                    <Ionicons name="chevron-forward" size={20} color="#5959A6" />
                   </Pressable>
                 ))
               )}
@@ -177,21 +177,21 @@ export default function NewTripScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-white dark:bg-gray-900 pt-6">
+    <SafeAreaView className="flex-1 bg-background pt-8">
       {/* Header */}
-      <View className="border-b border-slate-200 dark:border-gray-800 bg-white dark:bg-gray-900">
+      <View className="border-b border-primary/5 ">
         <View className="flex-row items-center p-4">
           <Pressable
             onPress={() => router.back()}
-            className="mr-4 p-2 rounded-full bg-gray-100 dark:bg-gray-800"
+            className="mr-4 p-2 rounded-full bg-primary/5"
           >
-            <Ionicons name="arrow-back" size={24} color="#4ECDC4" />
+            <Ionicons name="arrow-back" size={24} color="#000080" />
           </Pressable>
           <View>
-            <Text className="text-2xl font-bold text-foreground dark:text-white">
+            <Text className="text-2xl font-bold text-foreground">
               Create New Trip
             </Text>
-            <Text className="text-sm text-muted-foreground dark:text-gray-400">
+            <Text className="text-sm text-muted-foreground">
               Fill in the trip details below
             </Text>
           </View>
@@ -201,12 +201,12 @@ export default function NewTripScreen() {
       <ScrollView className="flex-1">
         <View className="p-4 space-y-6">
           {/* Route Information Card */}
-          <View className="bg-blue-50/50 dark:bg-gray-800/50 rounded-2xl p-4 mb-4 border border-gray-100 dark:border-gray-700">
+          <View className="rounded-2xl p-4 mb-4 border border-primary/5">
             <View className="flex-row items-center mb-4">
-              <View className="w-10 h-10 rounded-full bg-primary/10 dark:bg-primary/20 items-center justify-center mr-2">
-                <Ionicons name="map-outline" size={24} color="#4ECDC4" />
+              <View className="w-10 h-10 rounded-full bg-primary/5 items-center justify-center mr-2">
+                <Ionicons name="map-outline" size={24} color="#000080" />
               </View>
-              <Text className="text-lg font-semibold text-foreground dark:text-white">
+              <Text className="text-lg font-semibold text-foreground">
                 Route Information
               </Text>
             </View>
@@ -214,52 +214,56 @@ export default function NewTripScreen() {
             <View className="space-y-4">
               <View className="flex-row space-x-4">
                 <View className="flex-1">
-                  <Text className="text-sm font-medium mb-1.5 text-foreground dark:text-white">
+                  <Text className="text-sm font-medium mb-1.5 mt-1.5 text-foreground">
                     From
                   </Text>
                   <Pressable
                     onPress={() => setShowFromModal(true)}
-                    className="bg-white dark:bg-gray-900 px-4 py-3 me-1 rounded-xl 
-                      border border-gray-200 dark:border-gray-700 flex-row justify-between items-center"
+                    className="bg-white  px-4 py-3 me-1 rounded-xl 
+                      border border-primary/5 flex-row justify-between items-center"
                   >
                     <Text
                       className={`${
                         formData.from
-                          ? "text-foreground dark:text-white"
-                          : "text-gray-400"
+                          ? "text-foreground"
+                          : "text-muted-foreground"
                       }`}
                     >
                       {formData.from || "From"}
                     </Text>
-                    <Ionicons name="chevron-down" size={20} color="#666" />
+                    <Ionicons
+                      name="chevron-down"
+                      size={20}
+                      color="#5959A6"
+                    />
                   </Pressable>
                 </View>
                 <View className="flex-1">
-                  <Text className="text-sm font-medium mb-1.5 text-foreground dark:text-white">
+                  <Text className="text-sm font-medium mb-1.5 mt-1.5 text-foreground">
                     To
                   </Text>
                   <Pressable
                     onPress={() => setShowToModal(true)}
-                    className="bg-white dark:bg-gray-900 px-4 py-3 ms-1 rounded-xl 
-                      border border-gray-200 dark:border-gray-700 flex-row justify-between items-center"
+                    className="bg-white  px-4 py-3 ms-1 rounded-xl 
+                      border border-primary/5  flex-row justify-between items-center"
                   >
                     <Text
                       className={`${
                         formData.to
                           ? "text-foreground dark:text-white"
-                          : "text-gray-400"
+                          : "text-muted-foreground"
                       }`}
                     >
                       {formData.to || "To"}
                     </Text>
-                    <Ionicons name="chevron-down" size={20} color="#666" />
+                    <Ionicons name="chevron-down" size={20} color="#5959A6" />
                   </Pressable>
                 </View>
               </View>
 
               <View className="flex-row space-x-4">
                 <View className="flex-1">
-                  <Text className="text-sm font-medium mb-1.5 text-foreground dark:text-dark-foreground">
+                  <Text className="text-sm font-medium mb-1.5 mt-1.5 text-foreground">
                     Date
                   </Text>
                   <TextInput
@@ -268,13 +272,13 @@ export default function NewTripScreen() {
                       setFormData({ ...formData, date: text })
                     }
                     placeholder="DD/MM/YYYY"
-                    placeholderTextColor="#666"
-                    className="bg-white dark:bg-gray-900 px-4 py-3 rounded-xl 
-                      border border-gray-200 dark:border-gray-700 text-foreground dark:text-gray-100 me-1"
+                    placeholderTextColor="#5959A6"
+                    className="bg-white  px-4 py-3 rounded-xl 
+                      border border-gray-200 text-foreground  me-1"
                   />
                 </View>
                 <View className="flex-1">
-                  <Text className="text-sm font-medium mb-1.5 text-foreground dark:text-dark-foreground">
+                  <Text className="text-sm font-medium mb-1.5 mt-1.5 text-foreground">
                     Time
                   </Text>
                   <TextInput
@@ -283,9 +287,9 @@ export default function NewTripScreen() {
                       setFormData({ ...formData, time: text })
                     }
                     placeholder="HH:MM"
-                    placeholderTextColor="#666"
-                    className="bg-white dark:bg-gray-900 px-4 py-3 rounded-xl 
-                      border border-gray-200 dark:border-gray-700 text-foreground dark:text-gray-100 ms-1"
+                    placeholderTextColor="#5959A6"
+                    className="bg-white  px-4 py-3 rounded-xl 
+                      border border-primary/5  text-foreground  ms-1"
                   />
                 </View>
               </View>
@@ -293,19 +297,19 @@ export default function NewTripScreen() {
           </View>
 
           {/* Bus Details Card */}
-          <View className="bg-blue-50/50 dark:bg-gray-800/50 rounded-2xl p-4 mb-4 border border-gray-100 dark:border-gray-700">
+          <View className="rounded-2xl p-4 mb-4 border border-primary/5">
             <View className="flex-row items-center mb-4">
-              <View className="w-10 h-10 rounded-full bg-primary/10 dark:bg-primary/20 items-center justify-center mr-2">
-                <Ionicons name="bus-outline" size={24} color="#4ECDC4" />
+              <View className="w-10 h-10 rounded-full bg-primary/5 items-center justify-center mr-2">
+                <Ionicons name="bus-outline" size={24} color="#000080" />
               </View>
-              <Text className="text-lg font-semibold text-foreground dark:text-white">
+              <Text className="text-lg font-semibold text-foreground">
                 Bus Details
               </Text>
             </View>
 
             <View className="space-y-4">
               <View>
-                <Text className="text-sm font-medium mb-1.5 text-foreground dark:text-dark-foreground">
+                <Text className="text-sm font-medium mb-1.5 mt-1.5 text-foreground">
                   Bus Number
                 </Text>
                 <TextInput
@@ -314,14 +318,13 @@ export default function NewTripScreen() {
                     setFormData({ ...formData, busNumber: text })
                   }
                   placeholder="Enter bus number"
-                  placeholderTextColor="#666"
-                  className="bg-white dark:bg-gray-900 px-4 py-3 rounded-xl 
-                    border border-gray-200 dark:border-gray-700 text-foreground dark:text-gray-100 me-1"
+                  placeholderTextColor="#5959A6"
+                  className="bg-white px-4 py-3 rounded-xl border border-primary/5 text-foreground"
                 />
               </View>
               <View className="flex-row space-x-4">
                 <View className="flex-1">
-                  <Text className="text-sm font-medium mb-1.5 text-foreground dark:text-dark-foreground">
+                  <Text className="text-sm font-medium mb-1.5 mt-1.5 text-foreground">
                     Driver Name
                   </Text>
                   <TextInput
@@ -329,14 +332,13 @@ export default function NewTripScreen() {
                     onChangeText={(text) =>
                       setFormData({ ...formData, driverName: text })
                     }
-                    placeholder="Enter driver name"
-                    placeholderTextColor="#666"
-                    className="bg-white dark:bg-gray-900 px-4 py-3 rounded-xl 
-                      border border-gray-200 dark:border-gray-700 text-foreground dark:text-gray-100"
+                    placeholder="Driver name"
+                    placeholderTextColor="#5959A6"
+                    className="bg-white px-4 py-3 rounded-xl border border-primary/5 text-foreground me-1"
                   />
                 </View>
                 <View className="flex-1">
-                  <Text className="text-sm font-medium mb-1.5 text-foreground dark:text-dark-foreground">
+                  <Text className="text-sm font-medium mb-1.5 mt-1.5 text-foreground">
                     Conductor Name
                   </Text>
                   <TextInput
@@ -344,10 +346,9 @@ export default function NewTripScreen() {
                     onChangeText={(text) =>
                       setFormData({ ...formData, conductorName: text })
                     }
-                    placeholder="Enter conductor name"
-                    placeholderTextColor="#666"
-                    className="bg-white dark:bg-gray-900 px-4 py-3 rounded-xl 
-                      border border-gray-200 dark:border-gray-700 text-foreground dark:text-gray-100 ms-1"
+                    placeholder="Conductor name"
+                    placeholderTextColor="#5959A6"
+                    className="bg-white px-4 py-3 rounded-xl border border-primary/5 text-foreground ms-1"
                   />
                 </View>
               </View>
@@ -355,19 +356,19 @@ export default function NewTripScreen() {
           </View>
 
           {/* Ticket Details Card */}
-          <View className="bg-blue-50/50 dark:bg-gray-800/50 rounded-2xl p-4  border border-gray-100 dark:border-gray-700">
+          <View className="rounded-2xl p-4 border border-primary/5">
             <View className="flex-row items-center mb-4">
-              <View className="w-10 h-10 rounded-full bg-primary/10 dark:bg-primary/20 items-center justify-center mr-2">
-                <Ionicons name="ticket-outline" size={24} color="#4ECDC4" />
+              <View className="w-10 h-10 rounded-full bg-primary/5 items-center justify-center mr-2">
+                <Ionicons name="ticket-outline" size={24} color="#000080" />
               </View>
-              <Text className="text-lg font-semibold text-foreground dark:text-white">
+              <Text className="text-lg font-semibold text-foreground">
                 Ticket Details
               </Text>
             </View>
 
             <View className="flex-row space-x-4">
               <View className="flex-1">
-                <Text className="text-sm font-medium mb-1.5 text-foreground dark:text-dark-foreground">
+                <Text className="text-sm font-medium mb-1.5 mt-1.5 text-foreground">
                   Ticket Price
                 </Text>
                 <TextInput
@@ -377,13 +378,12 @@ export default function NewTripScreen() {
                   }
                   placeholder="0.00"
                   keyboardType="decimal-pad"
-                  placeholderTextColor="#666"
-                  className="bg-white dark:bg-gray-900 px-4 py-3 rounded-xl 
-                    border border-gray-200 dark:border-gray-700 text-foreground dark:text-gray-100 me-1"
+                  placeholderTextColor="#5959A6"
+                  className="bg-white px-4 py-3 rounded-xl border border-primary/5 text-foreground me-1"
                 />
               </View>
               <View className="flex-1">
-                <Text className="text-sm font-medium mb-1.5 text-foreground dark:text-dark-foreground">
+                <Text className="text-sm font-medium mb-1.5 mt-1.5 text-foreground">
                   Total Seats
                 </Text>
                 <TextInput
@@ -393,16 +393,15 @@ export default function NewTripScreen() {
                   }
                   keyboardType="number-pad"
                   placeholder="45"
-                  placeholderTextColor="#666"
-                  className="bg-white dark:bg-gray-900 px-4 py-3 rounded-xl 
-                    border border-gray-200 dark:border-gray-700 text-foreground dark:text-gray-100 ms-1"
+                  placeholderTextColor="#5959A6"
+                  className="bg-white px-4 py-3 rounded-xl border border-primary/5 text-foreground ms-1"
                 />
               </View>
             </View>
           </View>
         </View>
         {/* Submit Button */}
-        <View className="p-4  dark:border-gray-800 bg-white dark:bg-gray-900">
+        <View className="p-4 bg-white ">
           <Pressable
             onPress={handleSubmit}
             className="bg-primary p-4 rounded-xl items-center"
