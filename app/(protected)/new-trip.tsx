@@ -13,10 +13,10 @@ import { useState, useMemo } from "react";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { LocationSelector } from "../../components/new-trip/LocationSelector";
-import { BusSelector } from "../../components/new-trip/BusSelector";
-import { ConductorSelector } from "../../components/new-trip/ConductorSelector";
-import { DriverSelector } from "../../components/new-trip/DriverSelector";
+import { LocationSelector } from "@/components/new-trip/LocationSelector";
+import { BusSelector } from "@/components/new-trip/BusSelector";
+import { ConductorSelector } from "@/components/new-trip/ConductorSelector";
+import { DriverSelector } from "@/components/new-trip/DriverSelector";
 
 interface TripFormData {
   from: string;
