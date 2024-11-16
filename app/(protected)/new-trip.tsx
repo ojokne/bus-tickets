@@ -13,6 +13,7 @@ import { useState, useMemo } from "react";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { BusSelector } from "../../components/new-trip/BusSelector";
 
 // Add available locations
 const LOCATIONS = [
@@ -173,6 +174,7 @@ export default function NewTripScreen() {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [showTimePicker, setShowTimePicker] = useState(false);
   const [selectedTime, setSelectedTime] = useState(new Date());
+  const [showBusModal, setShowBusModal] = useState(false);
 
   const handleSubmit = async () => {
     try {
@@ -377,15 +379,15 @@ export default function NewTripScreen() {
                 <Text className="text-sm font-medium mb-1.5 mt-1.5 text-foreground">
                   Bus Number
                 </Text>
-                <TextInput
-                  value={formData.busNumber}
-                  onChangeText={(text) =>
-                    setFormData({ ...formData, busNumber: text })
-                  }
-                  placeholder="Enter bus number"
-                  placeholderTextColor="#5959A6"
-                  className="bg-white px-4 py-3 rounded-xl border border-primary/5 text-foreground"
-                />
+                <Pressable
+                  onPress={() => setShowBusModal(true)}
+                  className="bg-white px-4 py-3 rounded-xl border border-primary/5 flex-row justify-between items-center"
+                >
+                  <Text className={formData.busNumber ? "text-foreground" : "text-muted-foreground"}>
+                    {formData.busNumber || "Select Bus Number"}
+                  </Text>
+                  <Ionicons name="chevron-down" size={20} color="#5959A6" />
+                </Pressable>
               </View>
               <View className="flex-row space-x-4">
                 <View className="flex-1">
@@ -491,6 +493,12 @@ export default function NewTripScreen() {
         onClose={() => setShowToModal(false)}
         onSelect={(location) => setFormData({ ...formData, to: location })}
         title="Select Arrival City"
+      />
+
+      <BusSelector
+        visible={showBusModal}
+        onClose={() => setShowBusModal(false)}
+        onSelect={(bus) => setFormData({ ...formData, busNumber: bus })}
       />
     </SafeAreaView>
   );
