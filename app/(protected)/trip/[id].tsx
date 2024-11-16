@@ -43,8 +43,27 @@ const DUMMY_TRIP: Trip = {
 
 export default function TripDetailsScreen() {
   const { id } = useLocalSearchParams();
-  // In real app, fetch trip details using the id
   const trip = DUMMY_TRIP;
+
+  // Add edit handler
+  const handleEdit = () => {
+    router.push({
+      pathname: "/new-trip",
+      params: {
+        editMode: "true",
+        tripId: id,
+        from: trip.from,
+        to: trip.to,
+        date: trip.date,
+        time: trip.time,
+        busNumber: trip.busNumber,
+        price: trip.price,
+        totalSeats: trip.totalSeats,
+        driverName: trip.driverName,
+        conductorName: trip.conductorName
+      }
+    });
+  };
 
   const getStatusColor = (status: Trip["status"]) => {
     switch (status) {
@@ -92,21 +111,31 @@ export default function TripDetailsScreen() {
       <SafeAreaView className="flex-1 bg-background pt-8">
         {/* Header */}
         <View className="border-b border-primary/5">
-          <View className="flex-row items-center p-4">
-            <Pressable
-              onPress={() => router.back()}
-              className="mr-4 p-2 rounded-full bg-primary/5"
-            >
-              <Ionicons name="arrow-back" size={24} color="#000080" />
-            </Pressable>
-            <View>
-              <Text className="text-2xl font-bold text-foreground">
-                Trip Details
-              </Text>
-              <Text className="text-sm text-muted-foreground">
-                View and manage trip information
-              </Text>
+          <View className="flex-row items-center justify-between p-4">
+            <View className="flex-row items-center">
+              <Pressable
+                onPress={() => router.back()}
+                className="mr-4 p-2 rounded-full bg-primary/5"
+              >
+                <Ionicons name="arrow-back" size={24} color="#000080" />
+              </Pressable>
+              <View>
+                <Text className="text-2xl font-bold text-foreground">
+                  Trip Details
+                </Text>
+                <Text className="text-sm text-muted-foreground">
+                  View and manage trip information
+                </Text>
+              </View>
             </View>
+            {trip.status === "scheduled" && (
+              <Pressable
+                onPress={handleEdit}
+                className="p-2 rounded-full bg-primary/5"
+              >
+                <Ionicons name="create-outline" size={24} color="#000080" />
+              </Pressable>
+            )}
           </View>
         </View>
 

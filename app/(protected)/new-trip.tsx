@@ -10,7 +10,7 @@ import {
   Platform,
 } from "react-native";
 import { useState, useMemo } from "react";
-import { router } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { LocationSelector } from "@/components/new-trip/LocationSelector";
@@ -31,16 +31,19 @@ interface TripFormData {
 }
 
 export default function NewTripScreen() {
+  const params = useLocalSearchParams();
+  const isEditMode = params.editMode === 'true';
+
   const [formData, setFormData] = useState<TripFormData>({
-    from: "",
-    to: "",
-    date: "",
-    time: "",
-    busNumber: "",
-    price: "",
-    totalSeats: "45",
-    driverName: "",
-    conductorName: "",
+    from: params.from?.toString() || "",
+    to: params.to?.toString() || "",
+    date: params.date?.toString() || "",
+    time: params.time?.toString() || "",
+    busNumber: params.busNumber?.toString() || "",
+    price: params.price?.toString() || "",
+    totalSeats: params.totalSeats?.toString() || "45",
+    driverName: params.driverName?.toString() || "",
+    conductorName: params.conductorName?.toString() || ""
   });
 
   const [showFromModal, setShowFromModal] = useState(false);
@@ -55,10 +58,16 @@ export default function NewTripScreen() {
 
   const handleSubmit = async () => {
     try {
-      console.log("Submitting trip data:", formData);
+      if (isEditMode) {
+        console.log("Updating trip:", formData);
+        // Add your update API call here
+      } else {
+        console.log("Creating new trip:", formData);
+        // Add your create API call here
+      }
       router.back();
     } catch (error) {
-      console.error("Error creating trip:", error);
+      console.error("Error saving trip:", error);
     }
   };
 
@@ -99,10 +108,10 @@ export default function NewTripScreen() {
             </Pressable>
             <View>
               <Text className="text-2xl font-bold text-foreground">
-                Create New Trip
+                {isEditMode ? "Edit Trip" : "Create New Trip"}
               </Text>
               <Text className="text-sm text-muted-foreground">
-                Fill in the trip details below
+                {isEditMode ? "Update trip details below" : "Fill in the trip details below"}
               </Text>
             </View>
           </View>
@@ -344,13 +353,13 @@ export default function NewTripScreen() {
             </View>
           </View>
           {/* Submit Button */}
-          <View className="p-4 bg-white ">
+          <View className="p-4 bg-white">
             <Pressable
               onPress={handleSubmit}
               className="bg-primary p-4 rounded-xl items-center"
             >
               <Text className="text-white font-semibold text-lg">
-                Create Trip
+                {isEditMode ? "Update Trip" : "Create Trip"}
               </Text>
             </Pressable>
           </View>
