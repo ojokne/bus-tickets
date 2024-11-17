@@ -104,18 +104,19 @@ const DUMMY_BUSES: Bus[] = [
 
 const WaypointMarker = ({ waypoint, index }: { waypoint: Waypoint; index: number }) => (
   <Marker coordinate={waypoint}>
-    <View className={`rounded-full p-2 ${
-      waypoint.status === 'passed' ? 'bg-green-500' :
-      waypoint.status === 'next' ? 'bg-primary' :
-      'bg-gray-500'
-    }`}>
-      <Text className="text-white font-bold text-xs">{index + 1}</Text>
-    </View>
-    <View className="bg-white rounded-lg shadow-sm p-2 mt-1">
-      <Text className="text-xs font-medium">{waypoint.name}</Text>
-      <Text className="text-xs text-muted-foreground">
-        {waypoint.estimatedArrival}
-      </Text>
+    <View className="items-center">
+      <Ionicons 
+        name="location-sharp" 
+        size={24} 
+        color={
+          waypoint.status === 'passed' ? '#22c55e' : // green-500
+          waypoint.status === 'next' ? '#000080' :   // primary
+          '#9ca3af'                                  // gray-400
+        } 
+      />
+      <View className="bg-white rounded-lg shadow-sm px-2 py-1 -mt-2">
+        <Text className="text-[10px] font-medium text-gray-700">{waypoint.name}</Text>
+      </View>
     </View>
   </Marker>
 );
@@ -268,22 +269,26 @@ export default function BusTrackingScreen() {
           >
             {/* Origin Marker */}
             <Marker coordinate={bus.routeDetails.origin}>
-              <View className="bg-green-500 rounded-full p-2">
-                <Ionicons name="location" size={20} color="#fff" />
+              <View className="items-center">
+                <Ionicons name="location-sharp" size={24} color="#22c55e" />
+                <View className="bg-white rounded-lg shadow-sm px-2 py-1 -mt-2">
+                  <Text className="text-[10px] font-medium text-gray-700">
+                    {bus.routeDetails.origin.name}
+                  </Text>
+                </View>
               </View>
-              <Text className="text-xs font-medium bg-white px-2 py-1 rounded-md shadow-sm">
-                Start: {bus.routeDetails.origin.name}
-              </Text>
             </Marker>
 
             {/* Destination Marker */}
             <Marker coordinate={bus.routeDetails.destination}>
-              <View className="bg-red-500 rounded-full p-2">
-                <Ionicons name="location" size={20} color="#fff" />
+              <View className="items-center">
+                <Ionicons name="location-sharp" size={24} color="#ef4444" />
+                <View className="bg-white rounded-lg shadow-sm px-2 py-1 -mt-2">
+                  <Text className="text-[10px] font-medium text-gray-700">
+                    {bus.routeDetails.destination.name}
+                  </Text>
+                </View>
               </View>
-              <Text className="text-xs font-medium bg-white px-2 py-1 rounded-md shadow-sm">
-                End: {bus.routeDetails.destination.name}
-              </Text>
             </Marker>
 
             {/* Waypoint Markers */}
@@ -293,8 +298,13 @@ export default function BusTrackingScreen() {
 
             {/* Current Bus Location */}
             <Marker coordinate={bus.routeDetails.currentLocation}>
-              <View className="bg-primary rounded-full p-2">
-                <Ionicons name="bus" size={20} color="#fff" />
+              <View className="items-center">
+                <View className="bg-primary rounded-full p-1.5">
+                  <Ionicons name="bus" size={16} color="#fff" />
+                </View>
+                <View className="bg-white rounded-lg shadow-sm px-2 py-1 mt-1">
+                  <Text className="text-[10px] font-medium text-gray-700">Current Location</Text>
+                </View>
               </View>
             </Marker>
 
@@ -304,18 +314,22 @@ export default function BusTrackingScreen() {
               destination={bus.routeDetails.destination}
               waypoints={bus.routeDetails.waypoints}
               apikey={GOOGLE_MAPS_API_KEY}
-              strokeWidth={3}
+              strokeWidth={2}
               strokeColor="#000080"
               optimizeWaypoints={true}
-              onStart={(params) => {
-                console.log(`Started routing between "${params.origin}" and "${params.destination}"`);
-              }}
               onReady={result => {
-                console.log(`Distance: ${result.distance} km`);
-                console.log(`Duration: ${result.duration} min.`);
-              }}
-              onError={(errorMessage) => {
-                console.log('Error: ', errorMessage);
+                // Fit the map to show all markers
+                mapRef.current?.fitToCoordinates(
+                  [
+                    bus.routeDetails.origin,
+                    ...bus.routeDetails.waypoints,
+                    bus.routeDetails.destination
+                  ],
+                  {
+                    edgePadding: { top: 50, right: 50, bottom: 50, left: 50 },
+                    animated: true,
+                  }
+                );
               }}
             />
           </MapView>
