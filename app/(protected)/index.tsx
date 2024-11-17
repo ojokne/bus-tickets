@@ -212,9 +212,9 @@ const quickActions = [
   },
   {
     id: "4",
-    name: "Reports",
-    icon: "chart-bar",
-    route: "/(protected)/reports",
+    name: "Track Bus",
+    icon: "map-marker-alt",
+    route: "/(protected)/track-bus",
   },
 ];
 
